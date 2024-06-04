@@ -14,8 +14,8 @@ net = power_network();
         bus_2 = bus.PV(0.183,1.045,shunt);
         net.add_bus(bus_2);
     %Bus3 Generator & Load
-        bus_3 = bus.PV(-0.942,,shunt);
-        %net.add_bus(bus_3);
+        bus_3 = bus.PV(-0.942,1.01,shunt);
+        net.add_bus(bus_3);
     %Bus4 PQ Load
         bus_4 = bus.PQ(-0.478,0.039,shunt);
         net.add_bus(bus_4);
@@ -73,13 +73,13 @@ net = power_network();
         branch45 = branch.pi(4,5,[0.01335, 0.04211], 0);
         net.add_branch(branch45);
     %Branch47
-        branch47 = branch.pi_transformer(4,7,[0, 0.20912],0.978,0);
+        branch47 = branch.pi_transformer(4,7,[0, 0.20912],0,0.978,0);
         net.add_branch(branch47);
     %Branch49
-        branch49 = branch.pi_transformer(4,9,[0, 0.55618],0.969,0);
+        branch49 = branch.pi_transformer(4,9,[0, 0.55618],0,0.969,0);
         net.add_branch(branch49);
     %Branch56
-        branch56 = branch.pi_transformer(5,6,[0, 0.25202],0.932,0);
+        branch56 = branch.pi_transformer(5,6,[0, 0.25202],0,0.932,0);
         net.add_branch(branch56);
     %Branch611
         branch611 = branch.pi(6,11,[0.09498, 0.1989],0);
@@ -91,7 +91,7 @@ net = power_network();
         branch613 = branch.pi(6,13,[0.06615, 0.13027],0);
         net.add_branch(branch613);
     %Branch78
-        branch78 = branch.pi_transformer(7,8,[0, 0.17615],1,0);
+        branch78 = branch.pi_transformer(7,8,[0, 0.17615],0,1,0);
         net.add_branch(branch78);
     %Branch79
         branch79 = branch.pi(7,9,[0, 0.11001],0);
@@ -117,75 +117,84 @@ net = power_network();
     %system frequency
     omega0 = 50*2*pi;
 
-    %Bus1 Generator 1axis 200MW
-        %Xd = 1.7; Xd_p = 0.35; Xq = 1.7; Td_p = 1.0; M = M_all(n_sim, 1); D = D_all(n_sim, 1);
-        %mac_data = table(Xd,Xd_p,Xq,Td_p,M,D);
+    %Bus1 SG
+        %S = 615/100;
+        M = 2*5.148; D = 2; Xd  = 0.8979; Xd_p = 0.2995; Xd_pp = 0.23; Xq  = 0.646; Xq_p = 0.646; Xq_pp = 0.4; X_ls = 0.2396;Td_p = 7.4;Tq_p = 0;Td_pp = 0.03;Tq_pp = 0.033;
+        mac_data = table(Xq, Xq_p, Xq_pp,Xd, Xd_p, Xd_pp,X_ls,Td_p, Tq_p, Td_pp,Tq_pp,M, D);
     
-        %component1 = component.generator.one_axis(mac_data);
+        component1 = component.generator.park(mac_data);
         net.a_bus{1}.set_component(component1);
 
-    %Bus2 Generator 1axis 400M
-        %Xd = 1.7; Xd_prime = 0.35; Xq = 1.7; Td_p = 1.0; M = M_all(n_sim, 2); D = D_all(n_sim, 2);
-        %mac_data = table(Xd,Xd_p,Xq,Td_p,M,D);
+    %Bus2 SG
+        S = 60/100;
+        M = 2*6.54; D = 2; Xd  = 1.05; Xd_p = 0.185; Xd_pp = 0.13; Xq  = 0.98; Xq_p = 0.36; Xq_pp = 0.13; X_ls = 0;Td_p = 6.1;Tq_p = 0.3;Td_pp = 0.04;Tq_pp = 0.099;
+        mac_data = table(Xq, Xq_p, Xq_pp,Xd, Xd_p, Xd_pp,X_ls,Td_p, Tq_p, Td_pp,Tq_pp,M, D);
     
-        %component2 = component.generator.one_axis(mac_data);
+        component2 = component.generator.park(mac_data);
         net.a_bus{2}.set_component(component2);
 
-    %Bus3 Generator 1axis 800MW
-        %Xd = 1.7; Xd_prime = 0.35; Xq = 1.7; Td_p = 1.0; M = M_all(n_sim, 3); D = D_all(n_sim, 3);
-        %mac_data = table(Xd,Xd_p,Xq,Td_p,M,D);
+    %Bus3 SG
+        %S = 60/100;
+        M = 2*6.54; D = 2; Xd  = 1.05; Xd_p = 0.185; Xd_pp = 0.13; Xq  = 0.98; Xq_p = 0.36; Xq_pp = 0.13; X_ls = 0;Td_p = 6.1;Tq_p = 0.3;Td_pp = 0.04;Tq_pp = 0.099;
+        mac_data = table(Xq, Xq_p, Xq_pp,Xd, Xd_p, Xd_pp,X_ls,Td_p, Tq_p, Td_pp,Tq_pp,M, D);
     
-        %component3 = component.generator.one_axis(mac_data);
+        component3 = component.generator.park(mac_data);
         net.a_bus{3}.set_component(component3);
 
-    %Bus4 Generator 1axis 100MW
-        %Xd = 1.7; Xd_prime = 0.35; Xq = 1.7; Td_p = 1.0; M = M_all(n_sim, 4); D = D_all(n_sim, 4);
-        %mac_data = table(Xd,Xd_p,Xq,Td_p,M,D);
-    
-        %component4 = component.generator.one_axis(mac_data);
+    %Bus4 load
+        component4 = component.load.impedance();
         net.a_bus{4}.set_component(component4);
 
-    %Bus5 Impedance load
-        %component5 = component.load.power();
+    %Bus5 load
+        component5 = component.load.impedance();
         net.a_bus{5}.set_component(component5);
 
-    %Bus6 GFM Droop
-        %component6 = component.GFM.droop_DC1order();
+    %Bus6 SG
+        %S = 25/100;
+        M = 2*5.06; D = 2; Xd  = 1.25; Xd_p = 0.232; Xd_pp = 0.12; Xq  = 1.22; Xq_p = 0.715; Xq_pp = 0.12; X_ls = 0.134;Td_p = 4.75;Tq_p = 1.5;Td_pp = 0.06;Tq_pp = 0.21;
+        mac_data = table(Xq, Xq_p, Xq_pp,Xd, Xd_p, Xd_pp,X_ls,Td_p, Tq_p, Td_pp,Tq_pp,M, D);
+
+        component6 = component.generator.park(mac_data);
         net.a_bus{6}.set_component(component6);
 
-    %Bus7 GFM Droop
-        %component7 = component.GFM.droop_DC1order();
+    %Bus7 load
+        component7 = component.load.impedance();
         net.a_bus{7}.set_component(component7);
 
-    %Bus8 GFM Droop
-        %component8 = component.GFM.droop_DC1order();
+    %Bus8 SG
+        %S = 25/100;
+        M = 2*5.06; D = 2; Xd  = 1.25; Xd_p = 0.232; Xd_pp = 0.12; Xq  = 1.22; Xq_p = 0.715; Xq_pp = 0.12; X_ls = 0.134;Td_p = 4.75;Tq_p = 1.5;Td_pp = 0.06;Tq_pp = 0.21;
+        mac_data = table(Xq, Xq_p, Xq_pp,Xd, Xd_p, Xd_pp,X_ls,Td_p, Tq_p, Td_pp,Tq_pp,M, D);
+        
+        component8 = component.generator.park(mac_data);
         net.a_bus{8}.set_component(component8);
 
-    %Bus9 GFM Droop
-        %component9 = component.GFM.droop_DC1order();
+    %Bus9 load
+        component9 = component.load.impedance();
         net.a_bus{9}.set_component(component9);
 
-    %Bus10 GFM Droop
-        %component10 = component.GFM.droop_DC1order();
+    %Bus10 load
+        component10 = component.load.impedance();
         net.a_bus{10}.set_component(component10);
 
-    %Bus11 GFM Droop
-        %component11 = component.GFM.droop_DC1order();
+    %Bus11 load
+        component11 = component.load.impedance();
         net.a_bus{11}.set_component(component11);
 
-    %Bus12 GFM Droop
-        %component12 = component.GFM.droop_DC1order();
+    %Bus12 load
+        component12 = component.load.impedance();
         net.a_bus{12}.set_component(component12);
 
-    %Bus13 GFM Droop
-        %component13 = component.GFM.droop_DC1order();
+    %Bus13 load 
+        component13 = component.load.impedance();
         net.a_bus{13}.set_component(component13);
 
-    %Bus14 GFM Droop
-        %component14 = component.GFM.droop_DC1order();
+    %Bus14 load
+        component14 = component.load.impedance();
         net.a_bus{14}.set_component(component14);
 
     net.initialize
+    powerflow = (net.V_equilibrium).*conj(net.I_equilibrium);
 
     %simulation time
     %u    = struct('time',[0, 10, 20],'index',5,'u',[1;0]*[0, 0.5, 0.5],'method','zoh','function',[]);
