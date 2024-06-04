@@ -70,16 +70,16 @@ net = power_network();
         branch34 = branch.pi(3,4,[],);
         net.add_branch(branch34);
     %Branch47
-        branch47 = branch.pi(4,7,[],);
+        branch47 = branch.pi_transformer(4,7,[],0.978,0);
         net.add_branch(branch47);
     %Branch49
-        branch49 = branch.pi(4,9,[],);
+        branch49 = branch.pi_transformer(4,9,[],0.969,0);
         net.add_branch(branch49);
     %Branch54
         branch54 = branch.pi(5,4,[],);
         net.add_branch(branch54);
     %Branch56
-        branch56 = branch.pi(5,6,[],);
+        branch56 = branch.pi_transformer(5,6,[],0.932,0);
         net.add_branch(branch56);
     %Branch611
         branch611 = branch.pi(6,11,[],);
@@ -91,7 +91,7 @@ net = power_network();
         branch613 = branch.pi(6,13,[],);
         net.add_branch(branch613);
     %Branch78
-        branch78 = branch.pi(7,8,[],);
+        branch78 = branch.pi_transformer(7,8,[],1,0);
         net.add_branch(branch78);
     %Branch79
         branch79 = branch.pi(7,9,[],);
