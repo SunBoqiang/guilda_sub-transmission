@@ -4,6 +4,7 @@ net = power_network();
 %Bus defination Base
     %shunt admittance
         shunt = [0,0];
+        % Thank
 
     %Bus1 Slack V delta
         %bus_1 = bus.slack(5,0,shunt);
