@@ -5,50 +5,51 @@ net = power_network();
     %shunt admittance
         shunt = [0,0];
 
+    %Base 100MVA
     %Bus1 Slack V delta
-        %bus_1 = bus.slack(5,0,shunt);
+        bus_1 = bus.slack(1.06,0,shunt);
         net.add_bus(bus_1);
     %Bus2 Generator & Load
-        %bus_2 = bus.PV(2,5,shunt);
+        bus_2 = bus.PV(0.183,1.045,shunt);
         net.add_bus(bus_2);
     %Bus3 Generator & Load
-        %bus_3 = bus.PV(7,5,shunt);
+        bus_3 = bus.PV(-0.942,,shunt);
         %net.add_bus(bus_3);
     %Bus4 PQ Load
-        %bus_4 = bus.PV(1,5,shunt);
+        bus_4 = bus.PQ(-0.478,0.039,shunt);
         net.add_bus(bus_4);
     %Bus5 PQ Load
-        %bus_5 = bus.PQ(-16,0,shunt);
+        bus_5 = bus.PQ(-0.076,-0.016,shunt);
         net.add_bus(bus_5);
     %Bus6 Synchronous compensators
-        %bus_6 = bus.PV(5,5,shunt);
+        bus_6 = bus.PV(-0.112,1.07,shunt);
         net.add_bus(bus_6);
     %Bus7 Transformer
-        %bus_7 = bus.PV(5,5,shunt);
+        bus_7 = bus.PQ(0,0,shunt);
         net.add_bus(bus_7);
     %Bus8 Synchronous compensator
-        %bus_8 = bus.PV(5,5,shunt);
+        bus_8 = bus.PV(0,1.09,shunt);
         net.add_bus(bus_8);
     %Bus9 PQ 
-        %bus_9 = bus.PQ(5,5,shunt);
+        bus_9 = bus.PQ(-0.295,-0.166,[0, 0.19]);
         net.add_bus(bus_9);
     %Bus10 Load
-        %bus_10 = bus.PQ(5,5,shunt);
+        bus_10 = bus.PQ(-0.09,-0.058,shunt);
         net.add_bus(bus_10);
     %Bus11 Load
-        %bus_11 = bus.PQ(5,5,shunt);
+        bus_11 = bus.PQ(-0.035,-0.018,shunt);
         net.add_bus(bus_11);
     %Bus12 Load
-        %bus_12 = bus.PQ(5,5,shunt);
+        bus_12 = bus.PQ(-0.061,-0.016,shunt);
         net.add_bus(bus_12);
     %Bus13 Load
-        %bus_13 = bus.PQ(5,5,shunt);
+        bus_13 = bus.PQ(-0.135,-0.058,shunt);
         net.add_bus(bus_13);
     %Bus14 Load
-        %bus_14 = bus.PQ(5,5,shunt);
+        bus_14 = bus.PQ(-0.149,-0.05,shunt);
         net.add_bus(bus_14);
-%Branch defination
 
+%Branch defination
     %Branch12 
         branch12 = branch.pi(1,2,[],);
         net.add_branch(branch12);
