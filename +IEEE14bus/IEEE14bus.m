@@ -52,32 +52,32 @@ net = power_network();
 
 %Branch defination
     %Branch12 
-        branch12 = branch.pi(1,2,[],);
+        branch12 = branch.pi(1,2,[0.01938, 0.05917], 0.0528);
         net.add_branch(branch12);
     %Branch15 
-        branch15 = branch.pi(1,5,[],);
+        branch15 = branch.pi(1,5,[0.05403, 0.22304], 0.0492);
         net.add_branch(branch15);
     %Branch23 
-        branch23 = branch.pi(2,3,[],);
+        branch23 = branch.pi(2,3,[0.04699, 0.19797], 0.0438);
         net.add_branch(branch23);
     %Branch24
-        branch24 = branch.pi(2,4,[],);
+        branch24 = branch.pi(2,4,[0.05811, 0.17632], 0.034);
         net.add_branch(branch24);
     %Branch25
-        branch25 = branch.pi(2,5,[],);
+        branch25 = branch.pi(2,5,[0.05695, 0.17388], 0.0346);
         net.add_branch(branch25);
     %Branch34
-        branch34 = branch.pi(3,4,[],);
+        branch34 = branch.pi(3,4,[0.06701, 0.17103], 0.0128);
         net.add_branch(branch34);
+    %Branch45
+        branch45 = branch.pi(4,5,[0.01335, 0.04211], 0);
+        net.add_branch(branch45);
     %Branch47
-        branch47 = branch.pi_transformer(4,7,[],0.978,0);
+        branch47 = branch.pi_transformer(4,7,[0, 0.20912],0.978,0);
         net.add_branch(branch47);
     %Branch49
-        branch49 = branch.pi_transformer(4,9,[],0.969,0);
+        branch49 = branch.pi_transformer(4,9,[0, 0.55618],0.969,0);
         net.add_branch(branch49);
-    %Branch54
-        branch54 = branch.pi(5,4,[],);
-        net.add_branch(branch54);
     %Branch56
         branch56 = branch.pi_transformer(5,6,[0, 0.25202],0.932,0);
         net.add_branch(branch56);
