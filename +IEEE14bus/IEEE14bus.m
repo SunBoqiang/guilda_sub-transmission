@@ -1,7 +1,17 @@
-%Create power network framework
+%% Read me
+% If you want to simulate whole codes, you should to push 'fn+F5' or click
+% the 'Run' button above.
+% If you want to simulate by section, you need to click the section you
+% want, and push 'command+Enter'.
+
+%% Reset
+clc
+clear
+
+%% Create power network framework
 net = power_network();
 
-%Bus defination Base
+%% Bus defination Base
     %shunt admittance
         shunt = [0,0];
         % Thank
@@ -51,7 +61,7 @@ net = power_network();
         bus_14 = bus.PQ(-0.149,-0.05,shunt);
         net.add_bus(bus_14);
 
-%Branch defination
+%% Branch defination
     %Branch12 
         branch12 = branch.pi(1,2,[0.01938, 0.05917], 0.0528/2);
         net.add_branch(branch12);
@@ -113,10 +123,10 @@ net = power_network();
         branch1314 = branch.pi(13,14,[0.17093, 0.34802],0);
         net.add_branch(branch1314);
 
-%Component defination
-
-    %system frequency
-    omega0 = 50*2*pi;
+%% Component defination
+    
+%system frequency
+omega0 = 50*2*pi;
 
     %Bus1 SG
         %S = 615/100;
@@ -200,6 +210,8 @@ net = power_network();
     %simulation time
     %u    = struct('time',[0, 10, 20],'index',5,'u',[1;0]*[0, 0.5, 0.5],'method','zoh','function',[]);
     %out = net.simulate([0,20],'input',u);
+
+%% Display the result of simulation
 
     %check active power
     disp('------ACTIVE POWER[MW]------')
