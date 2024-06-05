@@ -52,22 +52,22 @@ net = power_network();
 
 %Branch defination
     %Branch12 
-        branch12 = branch.pi(1,2,[0.01938, 0.05917], 0.0528);
+        branch12 = branch.pi(1,2,[0.01938, 0.05917], 0.0528/2);
         net.add_branch(branch12);
     %Branch15 
-        branch15 = branch.pi(1,5,[0.05403, 0.22304], 0.0492);
+        branch15 = branch.pi(1,5,[0.05403, 0.22304], 0.0492/2);
         net.add_branch(branch15);
     %Branch23 
-        branch23 = branch.pi(2,3,[0.04699, 0.19797], 0.0438);
+        branch23 = branch.pi(2,3,[0.04699, 0.19797], 0.0438/2);
         net.add_branch(branch23);
     %Branch24
-        branch24 = branch.pi(2,4,[0.05811, 0.17632], 0.034);
+        branch24 = branch.pi(2,4,[0.05811, 0.17632], 0.034/2);
         net.add_branch(branch24);
     %Branch25
-        branch25 = branch.pi(2,5,[0.05695, 0.17388], 0.0346);
+        branch25 = branch.pi(2,5,[0.05695, 0.17388], 0.0346/2);
         net.add_branch(branch25);
     %Branch34
-        branch34 = branch.pi(3,4,[0.06701, 0.17103], 0.0128);
+        branch34 = branch.pi(3,4,[0.06701, 0.17103], 0.0128/2);
         net.add_branch(branch34);
     %Branch45
         branch45 = branch.pi(4,5,[0.01335, 0.04211], 0);
@@ -199,3 +199,28 @@ net = power_network();
     %simulation time
     %u    = struct('time',[0, 10, 20],'index',5,'u',[1;0]*[0, 0.5, 0.5],'method','zoh','function',[]);
     %out = net.simulate([0,20],'input',u);
+
+    %check active power
+    disp('------ACTIVE POWER[MW]------')
+    disp(real(powerflow)*100)
+    disp('----------------------------')
+
+    %check active power
+    disp('------REACTIVE POWER[MVAR]------')
+    disp(imag(powerflow)*100)
+    disp('----------------------------')
+
+    %check power loss
+    disp('------POWER LOSS[MVA]------')
+    disp(sum(powerflow)*100)
+    disp('----------------------------')
+
+    %check bus voltage
+    disp('------BUS VOLTAGE[p.u.]------')
+    disp(abs(net.V_equilibrium))
+    disp('----------------------------')
+
+    %check bus voltage' phase
+    disp('------BUS VOLTAGE PHASE[degree]------')
+    disp(rad2deg(angle(net.V_equilibrium)))
+    disp('----------------------------')
