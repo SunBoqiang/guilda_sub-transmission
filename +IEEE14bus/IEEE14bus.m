@@ -14,7 +14,6 @@ net = power_network();
 %% Bus defination Base
     %shunt admittance
         shunt = [0,0];
-        % Thank
 
     %Base 100MVA
     %Bus1 Slack V delta
@@ -42,7 +41,7 @@ net = power_network();
         bus_8 = bus.PV(0,1.09,shunt);
         net.add_bus(bus_8);
     %Bus9 PQ 
-        %bus_9 = bus.PQ(-0.295,-0.166,[0, 0.19]);
+        % bus_9 = bus.PQ(-0.295,-0.166,[0, 0.19]);
         bus_9 = bus.PQ(-0.295,0.0459,[0, 0]);
         net.add_bus(bus_9);
     %Bus10 Load
@@ -212,6 +211,7 @@ omega0 = 50*2*pi;
     %out = net.simulate([0,20],'input',u);
 
 %% Display the result of simulation
+% for pu, Power base is 100MVA.
 
     %check active power
     disp('------ACTIVE POWER[MW]------')
@@ -236,4 +236,9 @@ omega0 = 50*2*pi;
     %check bus voltage' phase
     disp('------BUS VOLTAGE PHASE[degree]------')
     disp(rad2deg(angle(net.V_equilibrium)))
+    disp('----------------------------')
+
+    %check bus voltage' phase
+    disp('------BUS VOLTAGE PHASE[rad]------')
+    disp(angle(net.V_equilibrium))
     disp('----------------------------')
