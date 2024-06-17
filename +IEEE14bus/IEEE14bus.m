@@ -42,8 +42,8 @@ net = power_network();
         bus_8 = bus.PV(0,1.09,shunt);
         net.add_bus(bus_8);
     %Bus9 PQ 
-        %bus_9 = bus.PQ(-0.295,-0.166,[0, 0.19]);
-        bus_9 = bus.PQ(-0.295,0.0459,[0, 0]);
+        bus_9 = bus.PQ(-0.295,-0.166,[0, 0.19]);
+        %bus_9 = bus.PQ(-0.295,0.0459,[0, 0]);
         net.add_bus(bus_9);
     %Bus10 Load
         bus_10 = bus.PQ(-0.09,-0.058,shunt);

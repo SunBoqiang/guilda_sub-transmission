@@ -19,6 +19,7 @@ for i = a_idx_branch(:)'
 end
 
 shunt = tools.vcellfun(@(b) b.shunt, obj.a_bus(a_idx_bus));
+shunt = zeros(size(shunt)); %shunt will not effect admittance matrix
 S = sparse(a_idx_bus, a_idx_bus, shunt, n_bus, n_bus);
 
 Y = Y + S;
