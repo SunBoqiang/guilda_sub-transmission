@@ -17,12 +17,12 @@ for i = a_idx_branch(:)'
         Y([br.from, br.to], [br.from, br.to]) = Y([br.from, br.to], [br.from, br.to]) + Y_branch;
     end
 end
+%
+% shunt = tools.vcellfun(@(b) b.shunt, obj.a_bus(a_idx_bus));
+% shunt = zeros(size(shunt)); %shunt will not effect admittance matrix
+% S = sparse(a_idx_bus, a_idx_bus, shunt, n_bus, n_bus);
 
-shunt = tools.vcellfun(@(b) b.shunt, obj.a_bus(a_idx_bus));
-shunt = zeros(size(shunt)); %shunt will not effect admittance matrix
-S = sparse(a_idx_bus, a_idx_bus, shunt, n_bus, n_bus);
-
-Y = Y + S;
+% Y = Y + S;
 if nargout == 2
     Ymat = tools.complex2matrix(Y);
 end

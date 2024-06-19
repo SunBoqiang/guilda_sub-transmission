@@ -23,7 +23,7 @@ classdef PQ < bus
         function out = get_constraint(obj, Vr, Vi, P, Q)
             Q_shunt = complex(Vr,Vi).*complex(Vr,Vi).*obj.shunt;
             out = [P-obj.P; Q-obj.Q - abs(Q_shunt)]; %add a constraint for Q which is produced by shunt
-            disp(out)
+            %disp(out)
         end
 
         function set_P(obj,P)
