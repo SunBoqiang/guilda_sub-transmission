@@ -35,6 +35,13 @@ function net = build(filepath)
                 P = Tab_bus{i, 'P_load'};
                 Q = Tab_bus{i, 'Q_load'};
                bus_ = bus.PQ(-P, -Q, shunt);
+
+            case {'PV_2comp','bus_PV_2comp',4}
+                V_abs = Tab_bus{i, 'V_abs'};
+                P = Tab_bus{i, 'P_gen'};
+                Pload = Tab_bus{i, 'P_load'};
+                Qload = Tab_bus{i, 'Q_load'};
+               bus_ = bus.PV_2comp(P, V_abs, [-Pload, -Qload], shunt);
         end
         if all(ismember({'GraphX','GraphY'},Tab_bus.Properties.VariableNames))
             bus_.GraphCoordinate = Tab_bus{i,{'GraphX','GraphY'}};

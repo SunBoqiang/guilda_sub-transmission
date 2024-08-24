@@ -285,6 +285,55 @@ out.plot('para', 'omega')
 % end
 % legend(["Pmech";"P"]+["/bus2","/bus3","/bus6"])
 
+%% IEEE14Bus DB
+clear
+clc
+net0 = network.IEEE14bus();
+powerflow = (net0.V_equilibrium).*conj(net0.I_equilibrium);
+
+%check active power
+disp('------ACTIVE POWER[MW]------')
+disp(real(powerflow)*100)
+disp('----------------------------')
+%check active power
+disp('------REACTIVE POWER[MVAR]------')
+disp(imag(powerflow)*100)
+disp('----------------------------')
+%check power loss
+disp('------POWER LOSS[MVA]------')
+disp(sum(powerflow)*100)
+disp('----------------------------')
+%check bus voltage
+disp('------BUS VOLTAGE[p.u.]------')
+disp(abs(net0.V_equilibrium))
+disp('----------------------------')
+%check bus voltage' phase
+disp('------BUS VOLTAGE PHASE[rad]------')
+disp(angle(net0.V_equilibrium))
+disp('----------------------------')
+%check bus voltage' phase
+disp('------BUS VOLTAGE PHASE[degree]------')
+disp(rad2deg(angle(net0.V_equilibrium)))
+disp('----------------------------')
+
+%% simul(fault)
+% out = net0.simulate([0,2],'fault',{{[7,7.01],1}});
+out = net0.simulate([0,2]);
+out.plot('para', 'omega')
+
+% c = {'r','b','g'};
+% idx = [2,3,6];
+% figure
+% grid on
+% hold on
+% xlabel('Time(s)')
+% ylabel('RealPower(p.u.)')
+% for i = 1:3
+%     Ploss = net_14BS.a_bus{idx(i)}.Pload;
+%     plot(out.t,out.Utotal{idx(i)}.Pmech-Ploss,c{i},'LineWidth',1.5,'LineStyle','--')
+%     plot(out.t,out.power{ idx(i)}.P    ,c{i},'LineWidth',1.5)
+% end
+% legend(["Pmech";"P"]+["/bus2","/bus3","/bus6"])
 %% 68BS - original
  
 net_68BS = network.IEEE68bus();
