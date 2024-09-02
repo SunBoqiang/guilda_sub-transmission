@@ -148,7 +148,7 @@ net_14BS.add_branch(branch1314);
 %% Component defination
     
 %system frequency
-omega0 = 50*2*pi;
+% omega0 = 60*2*pi;
 
 %Bus1 SG (Park)
 %S = 615/100;
@@ -229,7 +229,7 @@ net_14BS.a_bus{14}.set_component(component14);
 
 %% power flow calc
 net_14BS.initialize;
-powerflow = (net_14BS.V_equilibrium).*conj(net_14BS.I_equilibrium);
+powerflow_14BS = (net_14BS.V_equilibrium).*conj(net_14BS.I_equilibrium);
 
 %simulation time
 %u    = struct('time',[0, 10, 20],'index',5,'u',[1;0]*[0, 0.5, 0.5],'method','zoh','function',[]);
@@ -239,17 +239,17 @@ powerflow = (net_14BS.V_equilibrium).*conj(net_14BS.I_equilibrium);
 
 %check active power
 disp('------ACTIVE POWER[MW]------')
-disp(real(powerflow)*100)
+disp(real(powerflow_14BS)*100)
 disp('----------------------------')
 
 %check active power
 disp('------REACTIVE POWER[MVAR]------')
-disp(imag(powerflow)*100)
+disp(imag(powerflow_14BS)*100)
 disp('----------------------------')
 
 %check power loss
 disp('------POWER LOSS[MVA]------')
-disp(sum(powerflow)*100)
+disp(sum(powerflow_14BS)*100)
 disp('----------------------------')
 
 %check bus voltage
@@ -268,8 +268,9 @@ disp(rad2deg(angle(net_14BS.V_equilibrium)))
 disp('----------------------------')
 
 %% simul(fault)
-out = net_14BS.simulate([0,10],'fault',{{[1,1.01],1}});
-out.plot('para', 'omega')
+% out = net_14BS.simulate([0,10],'fault',{{[1,1.01],1}});
+out_14BS = net_14BS.simulate([0,0.4]);
+out_14BS.plot('para', 'omega')
 
 % c = {'r','b','g'};
 % idx = [2,3,6];
@@ -286,8 +287,8 @@ out.plot('para', 'omega')
 % legend(["Pmech";"P"]+["/bus2","/bus3","/bus6"])
 
 %% IEEE14Bus DB
-clear
-clc
+% clear
+% clc
 net0 = network.IEEE14bus();
 powerflow = (net0.V_equilibrium).*conj(net0.I_equilibrium);
 
@@ -317,9 +318,11 @@ disp(rad2deg(angle(net0.V_equilibrium)))
 disp('----------------------------')
 
 %% simul(fault)
-% out = net0.simulate([0,2],'fault',{{[7,7.01],1}});
-out = net0.simulate([0,2]);
-out.plot('para', 'omega')
+out0 = net0.simulate([0,3],'fault',{{[1,1.01],1}});
+% out0 = net0.simulate([0,100]);
+out0.plot('para', 'omega')
+out0.plot('para', 'I')
+out0.plot('para', 'V')
 
 % c = {'r','b','g'};
 % idx = [2,3,6];
@@ -338,18 +341,18 @@ out.plot('para', 'omega')
  
 net_68BS = network.IEEE68bus();
 
-powerflow = (net_68BS.V_equilibrium).*conj(net_68BS.I_equilibrium);
+powerflow_68BS = (net_68BS.V_equilibrium).*conj(net_68BS.I_equilibrium);
 
 disp('------ACTIVE POWER[MW]------')
-disp(real(powerflow))
+disp(real(powerflow_68BS))
 disp('----------------------------')
 %check active power
 disp('------REACTIVE POWER[MVAR]------')
-disp(imag(powerflow))
+disp(imag(powerflow_68BS))
 disp('----------------------------')
 %check power loss
 disp('------POWER LOSS[MVA]------')
-disp(sum(powerflow))
+disp(sum(powerflow_68BS))
 disp('----------------------------')
 %check bus voltage
 disp('------BUS VOLTAGE[p.u.]------')
@@ -364,8 +367,8 @@ disp('------BUS VOLTAGE PHASE[rad]------')
 disp(angle(net_68BS.V_equilibrium))
 disp('----------------------------')
 %% Simulation(fault)
-out = net_68BS.simulate([0,10],'fault',{{[1,1.01],64}});
-out.plot('para', 'omega')
+out_68BS = net_68BS.simulate([0,10],'fault',{{[1,1.01],64}});
+out_68BS.plot('para', 'omega')
 %% 13BS - Remove #1 bus and make #2 bus slack bus
 net_13BS = power_network();
 %% Bus defination Base
