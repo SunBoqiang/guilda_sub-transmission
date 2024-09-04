@@ -1,7 +1,6 @@
 %%
 clc
 clear
-
 %% Bus defination Base
 %Base 100MVA
 

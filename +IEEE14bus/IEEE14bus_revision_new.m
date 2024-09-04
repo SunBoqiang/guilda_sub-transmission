@@ -2,7 +2,7 @@ clear
 clc
 %% 14BS - original
 net_14BS = power_network();
-%% Bus defination Base
+% Bus defination Base
 %shunt admittance
 shunt = [0,0];
 
@@ -14,22 +14,28 @@ net_14BS.add_bus(bus_1);
 
 %Bus2 Generator & Load
 bus_2 = bus.PV_2comp(0.4,1.045,[-0.217,-0.127],shunt);
+% bus_2 = bus.PV_2comp(0.4,1.045,[0.217,0.127],shunt);
 net_14BS.add_bus(bus_2);
 
 %Bus3 Generator & Load
 bus_3 = bus.PV_2comp(0,1.01,[-0.942,-0.19],shunt);
+% bus_3 = bus.PV_2comp(0,1.01,[0.942,0.19],shunt);
 net_14BS.add_bus(bus_3);
 
 %Bus4 PQ Load
 bus_4 = bus.PQ(-0.478,0.039,shunt);
+% bus_4 = bus.PQ(0.478,-0.039,shunt);
 net_14BS.add_bus(bus_4);
 
 %Bus5 PQ Load
 bus_5 = bus.PQ(-0.076,-0.016,shunt);
+% bus_5 = bus.PQ(0.076,0.016,shunt);
 net_14BS.add_bus(bus_5);
 
 %Bus6 Synchronous compensators
+% % bus_6 = bus.PV_2comp(0,1.07,[-0.112,-0.075],shunt);
 bus_6 = bus.PV_2comp(0,1.07,[-0.112,-0.075],shunt);
+% bus_6 = bus.PV_2comp(0,1.07,[0.112,0.075],shunt);
 net_14BS.add_bus(bus_6);
 
 %Bus7 Transformer
@@ -42,29 +48,35 @@ net_14BS.add_bus(bus_8);
 
 %Bus9 PQ 
 bus_9 = bus.PQ(-0.295,-0.166,[0, 0.19]);
+% bus_9 = bus.PQ(0.295,0.166,[0, 0.19]);
 net_14BS.add_bus(bus_9);
 
 %Bus10 Load
 bus_10 = bus.PQ(-0.09,-0.058,shunt);
+% bus_10 = bus.PQ(0.09,0.058,shunt);
 net_14BS.add_bus(bus_10);
 
 %Bus11 Load
 bus_11 = bus.PQ(-0.035,-0.018,shunt);
+% bus_11 = bus.PQ(0.035,0.018,shunt);
 net_14BS.add_bus(bus_11);
 
 %Bus12 Load
 bus_12 = bus.PQ(-0.061,-0.016,shunt);
+% bus_12 = bus.PQ(0.061,0.016,shunt);
 net_14BS.add_bus(bus_12);
 
 %Bus13 Load
 bus_13 = bus.PQ(-0.135,-0.058,shunt);
+% bus_13 = bus.PQ(0.135,0.058,shunt);
 net_14BS.add_bus(bus_13);
 
 %Bus14 Load
 bus_14 = bus.PQ(-0.149,-0.05,shunt);
+% bus_14 = bus.PQ(0.149,0.05,shunt);
 net_14BS.add_bus(bus_14);
 
-%% Branch defination
+% Branch defination
 %Branch 1 to 2 
 branch12 = branch.pi(1,2,[0.01938, 0.05917], 0.0528/2);
 net_14BS.add_branch(branch12);
@@ -145,7 +157,7 @@ net_14BS.add_branch(branch1213);
 branch1314 = branch.pi(13,14,[0.17093, 0.34802],0);
 net_14BS.add_branch(branch1314);
 
-%% Component defination
+% Component defination
     
 %system frequency
 % omega0 = 60*2*pi;
@@ -227,14 +239,14 @@ component14 = component.load.impedance();
 net_14BS.a_bus{14}.set_component(component14);
 
 
-%% power flow calc
+% power flow calc
 net_14BS.initialize;
 powerflow_14BS = (net_14BS.V_equilibrium).*conj(net_14BS.I_equilibrium);
 
 %simulation time
 %u    = struct('time',[0, 10, 20],'index',5,'u',[1;0]*[0, 0.5, 0.5],'method','zoh','function',[]);
 %out = net.simulate([0,20],'input',u);
-%% Display the result of simulation
+% Display the result of simulation
 % for pu, Power base is 100MVA.
 
 %check active power
@@ -268,8 +280,8 @@ disp(rad2deg(angle(net_14BS.V_equilibrium)))
 disp('----------------------------')
 
 %% simul(fault)
-% out = net_14BS.simulate([0,10],'fault',{{[1,1.01],1}});
-out_14BS = net_14BS.simulate([0,0.4]);
+out_14BS = net_14BS.simulate([0,5],'fault',{{[1,1.01],1}});
+% out_14BS = net_14BS.simulate([0,10000]);
 out_14BS.plot('para', 'omega')
 
 % c = {'r','b','g'};
@@ -287,8 +299,8 @@ out_14BS.plot('para', 'omega')
 % legend(["Pmech";"P"]+["/bus2","/bus3","/bus6"])
 
 %% IEEE14Bus DB
-% clear
-% clc
+clear
+clc
 net0 = network.IEEE14bus();
 powerflow = (net0.V_equilibrium).*conj(net0.I_equilibrium);
 
@@ -318,8 +330,8 @@ disp(rad2deg(angle(net0.V_equilibrium)))
 disp('----------------------------')
 
 %% simul(fault)
-out0 = net0.simulate([0,3],'fault',{{[1,1.01],1}});
-% out0 = net0.simulate([0,100]);
+out0 = net0.simulate([0,10],'fault',{{[1,1.01],1}});
+% out0 = net0.simulate([0,10000]);
 out0.plot('para', 'omega')
 out0.plot('para', 'I')
 out0.plot('para', 'V')

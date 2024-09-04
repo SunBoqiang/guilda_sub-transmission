@@ -154,8 +154,9 @@ classdef LossPark < component.generator.abstract
             % Add Loss Current
             Pl = obj.Pload;
             Ql = obj.Qload;
-            Iloss = 1/Vabs^2 * [-Pl, -Ql; Ql, -Pl]*V;
-            I = I + Iloss;
+            % Iloss = 1/Vabs^2 * [-Pl, -Ql; Ql, -Pl]*V;
+            Iloss = 1/Vabs^2 * [Pl, Ql; -Ql, Pl]*V;
+            I = I - Iloss;
             % @@@@@@@@@@@@
 
             con = I - [Ir; Ii];
@@ -186,9 +187,9 @@ classdef LossPark < component.generator.abstract
             
             % % @@@ 追加部分 @@@
             % Add Loss Current
-            Loss  = - obj.Pload - 1j*obj.Qload;
+            Loss  = obj.Pload + 1j*obj.Qload;
             Iloss = conj(Loss/V);
-            I = I + Iloss;
+            I = I - Iloss;
             % % @@@@@@@@@@@@
 
             Vangle = angle(V);

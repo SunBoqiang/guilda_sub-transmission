@@ -5,7 +5,7 @@ No,V_abs,V_angle,P_gen,Q_gen,P_load,Q_load,G_shunt,B_shunt,type,SetClass,SetMeth
 4,0,0,0,0,0.478,-0.039,0,0,PQ,load_impedance,set_component,4,0,0
 5,0,0,0,0,0.076,0.016,0,0,PQ,load_impedance,set_component,5,0,0
 6,1.07,0,0,0.122,0.112,0.075,0,0,PV_2comp,generator_LossPark,set_component,6,0,0
-7,0,0,0,0,0,0,0,0,PQ,load_impedance,set_component,7,0,0
+7,0,0,0,0,0,0,0,0,PQ,,,7,0,0
 8,1.09,0,0,0.174,0,0,0,0,PV,generator_park,set_component,8,0,0
 9,0,0,0,0,0.295,0.166,0,0.19,PQ,load_impedance,set_component,9,0,0
 10,0,0,0,0,0.09,0.058,0,0,PQ,load_impedance,set_component,10,0,0
