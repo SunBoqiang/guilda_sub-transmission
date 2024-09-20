@@ -1,6 +1,8 @@
 %% Generator (Park model) - Dynamical parameters
 % base: 100MVA
 
+omega0 = 2*pi*60;
+
 % Gen 1 (Synchronous generator): (Pg = 2.324, Vg = 1.06, Qg_max = 9.9, Qg_min = -9.9)
 S_n1 = 615/100;
 X_ls1 = 0.2396;
